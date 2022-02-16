@@ -1,0 +1,47 @@
+{
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        "**/test": true,
+        "**/web": true,
+        "**/.gitignore": true,
+        "**/.metadata": true,
+        "**/.packages": true,
+        "**/.dart_tool": true,
+        "**/.idea": true,
+        "**/android": false,
+        "**/.vscode": true,
+        "**/ios": true,
+        "*.yaml": false,
+        "**/analysis_options.yaml": true,
+        "*.iml": true,
+        "*.lock": true,
+        "*.md": true,
+        "**/build": true,
+        "**/windows": true,
+        "**/.flutter-plugins": true,
+        "**/.flutter-plugins-dependencies": true,
+        "chateo/*.iml": true,
+        "chateo/*.lock": true,
+        "chateo/chateo": false
+    },
+   
+    "cSpell.words": [
+        "Authstate",
+        "autocorrect",
+        "chatbubble",
+        "Fontisto",
+        "Formz",
+        "horiz",
+        "Ionicons",
+        "newsly",
+        "Themo",
+        "timeago",
+        "vsync"
+    ],
+    "explorerExclude.backup": null
+}
