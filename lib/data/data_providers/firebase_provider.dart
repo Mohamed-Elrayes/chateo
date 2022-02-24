@@ -1,11 +1,10 @@
 import 'dart:io';
 
-import '../../core/constants/logger_devtool.dart';
+import 'package:chateo/core/constants/api_constant.dart';
+import 'package:chateo/core/constants/logger_devtool.dart';
+import 'package:chateo/data/interface/i_firebase.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:path/path.dart';
-
-import '../../core/constants/api_constant.dart';
-import 'i_firebase.dart';
 
 class FirebaseProvider implements FirebaseMethod {
   FirebaseStorage firebase;

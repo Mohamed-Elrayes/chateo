@@ -15,10 +15,10 @@ class FadeThroughTransitionWidget extends StatelessWidget {
     return PageTransitionSwitcher(
       transitionBuilder: (child, animation, secondaryAnimation) {
         return FadeThroughTransition(
-          fillColor:  Colors.transparent,
-          child: child,
+          fillColor: Colors.transparent,
           animation: animation,
           secondaryAnimation: secondaryAnimation,
+          child: child,
         );
       },
       child: child,

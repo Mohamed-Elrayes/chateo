@@ -5,7 +5,6 @@ import 'package:chateo/logic/cubit/profile_data/profile_data_cubit.dart';
 import 'package:chateo/presentation/widget/shared_widget/custom_text_widget.dart';
 import 'package:chateo/presentation/widget/shared_widget/dialog_widget.dart';
 import 'package:chateo/presentation/widget/shared_widget/loading_indicator.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -43,14 +42,15 @@ class OtpScreen extends HookWidget {
                 listenWhen: (previous, current) =>
                     previous.authStatus != current.authStatus,
                 listener: (_, state) {
-                  if (state.authStatus == AuthStatus.otpVerified && state.kindUser == KindUser.newUser ) {
+                  if (state.authStatus == AuthStatus.otpVerified &&
+                      state.kindUser == KindUser.newUser) {
                     Navigator.pushNamedAndRemoveUntil(
                       context,
                       RouterName.bottomNavScreen,
                       (route) => false,
                     );
-                  }else if (state.authStatus == AuthStatus.otpVerified){
- Navigator.pushNamedAndRemoveUntil(
+                  } else if (state.authStatus == AuthStatus.otpVerified) {
+                    Navigator.pushNamedAndRemoveUntil(
                       context,
                       RouterName.profileScreen,
                       (route) => false,

@@ -17,21 +17,20 @@ class AppColors {
   LinearGradient variantGradient = const LinearGradient(
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
-      colors: [Color(0XFFD2D5F9), Color(0XFF2C37E1)]);
+      colors: [Color(0XFFD2D5F9), Color(0XFF2C37E1)],);
   LinearGradient variantGradient2 = const LinearGradient(
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
-      colors: [Color(0XFFEC9EFF), Color(0XFF5F2EEA)]);
+      colors: [Color(0XFFEC9EFF), Color(0XFF5F2EEA)],);
  
   static ColorScheme get lightColorScheme => const ColorScheme.light(
       primary: AppColors.activeColorFont,
       secondary: AppColors.buttonColor,
-      background: AppColors.bgColor,
       onBackground: AppColors.activeColorFont,
       onPrimary: AppColors.activeColorFont,
       onTertiary: AppColors.bgSecondColor,
       onSecondary: Color(0xFFADB5BD),
-      onSurface: AppColors.disableColor);
+      onSurface: AppColors.disableColor,);
 
   static ColorScheme get darkColorScheme => const ColorScheme.dark(
         primary: AppColors.bgSecondColor,

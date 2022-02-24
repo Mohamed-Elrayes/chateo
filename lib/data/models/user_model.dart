@@ -1,9 +1,3 @@
-
-import 'dart:convert';
-import 'dart:io';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 class UserModel {
   String? id;
   String? phoneNumber;
@@ -11,21 +5,16 @@ class UserModel {
   String? lastName;
   String? profileImage;
   String? imageUrlServer;
-  String?  timeStamp;
+  String? timeStamp;
   UserModel({
-     this.id,
-     this.phoneNumber,
-     this.firstName,
+    this.id,
+    this.phoneNumber,
+    this.firstName,
     this.lastName,
     this.profileImage,
     this.imageUrlServer,
     this.timeStamp,
   });
- 
-
- 
-
-
 
   Map<String, dynamic> toMap() {
     return {
@@ -38,7 +27,4 @@ class UserModel {
       'timeStamp': timeStamp,
     };
   }
-
-
-
 }

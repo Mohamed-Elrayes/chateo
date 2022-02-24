@@ -6,7 +6,6 @@ class SearchFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
-      autofocus: false,
       onChanged: (value) {},
       cursorColor: Theme.of(context).colorScheme.onPrimary,
       style: Theme.of(context).textTheme.bodyText2?.copyWith(fontSize: 17),

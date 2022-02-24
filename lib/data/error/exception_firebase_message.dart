@@ -1,5 +1,5 @@
 
-import '../../core/constants/logger_devtool.dart';
+import 'package:chateo/core/constants/logger_devtool.dart';
 
 class SignUpWithEmailAndPasswordFailure implements Exception {
   /// The associated error message.

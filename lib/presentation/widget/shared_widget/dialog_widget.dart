@@ -1,4 +1,4 @@
-import 'custom_text_widget.dart';
+import 'package:chateo/presentation/widget/shared_widget/custom_text_widget.dart';
 import 'package:flutter/material.dart';
 
 class DialogWidget extends StatelessWidget {

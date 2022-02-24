@@ -8,9 +8,7 @@ class WidgetAppTheme {
   static InputDecorationTheme get inputDecoration => InputDecorationTheme(
         hintStyle: TextAppTheme.textTheme.bodyText2
             ?.copyWith(color: _colorScheme.onSurface),
-        focusedBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(width: 1.0),
-        ),
+        focusedBorder: const UnderlineInputBorder(),
       );
 
   static IconThemeData get iconThemeData =>
@@ -18,11 +16,12 @@ class WidgetAppTheme {
 
   static AppBarTheme get appBarTheme => AppBarTheme(
         systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor: Colors.transparent,
-            statusBarIconBrightness:
-                _colorScheme.primary != AppColors.activeColorFont
-                    ? Brightness.light
-                    : Brightness.dark),
+          statusBarColor: Colors.transparent,
+          statusBarIconBrightness:
+              _colorScheme.primary != AppColors.activeColorFont
+                  ? Brightness.light
+                  : Brightness.dark,
+        ),
         // toolbarHeight: 50,
         color: Colors.transparent,
         elevation: 0,
@@ -35,23 +34,27 @@ class WidgetAppTheme {
         showSelectedLabels: false,
         showUnselectedLabels: false,
         selectedItemColor: _colorScheme.onPrimary,
-        unselectedItemColor: _colorScheme.secondaryVariant,
+        unselectedItemColor: _colorScheme.secondaryContainer,
       );
 
   static TabBarTheme get tabBarTheme => TabBarTheme(
         labelColor: _colorScheme.secondary,
         labelPadding: const EdgeInsets.symmetric(horizontal: 3),
         indicator: BoxDecoration(
-            borderRadius: BorderRadius.circular(100),
-            color: _colorScheme.primary),
-        unselectedLabelColor: _colorScheme.secondaryVariant,
+          borderRadius: BorderRadius.circular(100),
+          color: _colorScheme.primary,
+        ),
+        unselectedLabelColor: _colorScheme.secondaryContainer,
       );
 
   static ElevatedButtonThemeData get elevatedButton => ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(
+        style: ElevatedButton.styleFrom(
           primary: _colorScheme.secondary,
           onPrimary: _colorScheme.onBackground,
           padding: const EdgeInsets.symmetric(horizontal: 40),
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(100))));
+            borderRadius: BorderRadius.circular(100),
+          ),
+        ),
+      );
 }

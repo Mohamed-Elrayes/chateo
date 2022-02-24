@@ -1,10 +1,8 @@
-
-import '../widget/shared_widget/button_widget.dart';
+import 'package:chateo/core/constants/router_name.dart';
+import 'package:chateo/presentation/widget/shared_widget/button_widget.dart';
+import 'package:chateo/presentation/widget/shared_widget/custom_text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
-import '../../core/constants/router_name.dart';
-import '../widget/shared_widget/custom_text_widget.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -34,8 +32,11 @@ class WelcomeScreen extends StatelessWidget {
                       ),
                       Align(
                         alignment: Alignment.topRight,
-                        child: SvgPicture.asset('assets/onboard_right.svg',
-                            fit: BoxFit.cover, semanticsLabel: 'onboard_right'),
+                        child: SvgPicture.asset(
+                          'assets/onboard_right.svg',
+                          fit: BoxFit.cover,
+                          semanticsLabel: 'onboard_right',
+                        ),
                       ),
                     ],
                   ),
@@ -56,9 +57,10 @@ class WelcomeScreen extends StatelessWidget {
                     height: 10,
                   ),
                   ButtonWidget(
-                      label: 'Start Messaging',
-                      onTap: () => Navigator.of(context)
-                          .pushNamed(RouterName.verificationScreen))
+                    label: 'Start Messaging',
+                    onTap: () => Navigator.of(context)
+                        .pushNamed(RouterName.verificationScreen),
+                  )
                 ],
               )
             ],

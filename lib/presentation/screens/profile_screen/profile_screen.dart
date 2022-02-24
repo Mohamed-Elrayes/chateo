@@ -1,6 +1,5 @@
 import 'package:chateo/core/constants/logger_devtool.dart';
 import 'package:chateo/core/constants/router_name.dart';
-import 'package:chateo/logic/cubit/auth/phone_auth_cubit.dart';
 import 'package:chateo/logic/cubit/image_profile/image_profile_cubit.dart';
 import 'package:chateo/logic/cubit/profile_data/profile_data_cubit.dart';
 import 'package:chateo/presentation/screens/profile_screen/components/build_form_fields.dart';
@@ -16,8 +15,8 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  BlocProvider(
-          create: (context) => ImageProfileCubit(),
+    return BlocProvider(
+      create: (context) => ImageProfileCubit(),
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Your Profile'),
@@ -35,7 +34,6 @@ class _BuildProfileWidgets extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _readProfileDataCubit = BlocProvider.of<ProfileDataCubit>(context);
-    final _readPhoneAuthDataCubit = BlocProvider.of<PhoneAuthCubit>(context);
     return Form(
       key: _formKey,
       child: SingleChildScrollView(
@@ -122,7 +120,8 @@ class _BuildProfileWidgets extends StatelessWidget {
                             return;
                           } else {
                             _formKey.currentState!.save();
-                            final data = _readProfileDataCubit.profileDataCached;
+                            final data =
+                                _readProfileDataCubit.profileDataCached;
                             _readProfileDataCubit.saveProfileData();
                             data.firstName?.logWtf();
                             data.lastName?.logWtf();

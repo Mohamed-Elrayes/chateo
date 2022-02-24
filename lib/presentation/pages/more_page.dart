@@ -1,8 +1,7 @@
+import 'package:chateo/core/constants/icon_constant.dart';
+import 'package:chateo/presentation/widget/shared_widget/custom_text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-
-import '../../core/constants/icon_constant.dart';
-import '../widget/shared_widget/custom_text_widget.dart';
 
 class MorePage extends StatelessWidget {
   const MorePage({Key? key}) : super(key: key);
@@ -16,20 +15,23 @@ class MorePage extends StatelessWidget {
       body: AnimationLimiter(
         child: ListView(
           children: AnimationConfiguration.toStaggeredList(
-            children: ListTile.divideTiles(context: context, tiles: [
-              const _SectionWidget(
-                child: _InfoSectionItem(),
-              ),
-              const _SectionWidget(
-                child: _ChatSectionItem(),
-              ),
-              const _SectionWidget(
-                child: _SettingSectionItem(),
-              ),
-              const _SectionWidget(
-                child: _HelpSectionItem(),
-              ),
-            ]).toList(),
+            children: ListTile.divideTiles(
+              context: context,
+              tiles: [
+                const _SectionWidget(
+                  child: _InfoSectionItem(),
+                ),
+                const _SectionWidget(
+                  child: _ChatSectionItem(),
+                ),
+                const _SectionWidget(
+                  child: _SettingSectionItem(),
+                ),
+                const _SectionWidget(
+                  child: _HelpSectionItem(),
+                ),
+              ],
+            ).toList(),
             duration: const Duration(milliseconds: 375),
             childAnimationBuilder: (widget) => SlideAnimation(
               horizontalOffset: 50.0,
@@ -88,10 +90,16 @@ class _SettingSectionItem extends StatelessWidget {
       children: [
         _CustomListItem(title: 'Appearance', onTap: () {}, iconLead: sunIcon),
         _CustomListItem(
-            title: 'Notification', onTap: () {}, iconLead: notificationIcon),
+          title: 'Notification',
+          onTap: () {},
+          iconLead: notificationIcon,
+        ),
         _CustomListItem(title: 'Privacy', onTap: () {}, iconLead: privacyIcon),
         _CustomListItem(
-            title: 'Data Usage', onTap: () {}, iconLead: folderIcon),
+          title: 'Data Usage',
+          onTap: () {},
+          iconLead: folderIcon,
+        ),
       ],
     );
   }
@@ -106,7 +114,10 @@ class _HelpSectionItem extends StatelessWidget {
       children: [
         _CustomListItem(title: 'Help', onTap: () {}, iconLead: helpIcon),
         _CustomListItem(
-            title: 'Invite Your Friends', onTap: () {}, iconLead: messageIcon),
+          title: 'Invite Your Friends',
+          onTap: () {},
+          iconLead: messageIcon,
+        ),
       ],
     );
   }

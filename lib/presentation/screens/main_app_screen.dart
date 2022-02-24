@@ -1,15 +1,13 @@
-import '../../core/constants/router_name.dart';
-import 'bottom_nav_screen/bottom_nav_screen.dart';
-import 'otp_screen/otp_screen.dart';
-import 'profile_screen/profile_screen.dart';
-import 'verification_screen/verification_screen.dart';
-import 'welcome_screen.dart';
+import 'package:chateo/core/constants/router_name.dart';
+import 'package:chateo/core/theme/app_theme.dart';
+import 'package:chateo/logic/cubit/theme/theme_cubit.dart';
+import 'package:chateo/presentation/screens/bottom_nav_screen/bottom_nav_screen.dart';
+import 'package:chateo/presentation/screens/otp_screen/otp_screen.dart';
+import 'package:chateo/presentation/screens/profile_screen/profile_screen.dart';
+import 'package:chateo/presentation/screens/verification_screen/verification_screen.dart';
+import 'package:chateo/presentation/screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../core/theme/app_theme.dart';
-import '../../logic/cubit/theme/theme_cubit.dart';
-import '../../logic/cubit/timer/timer_cubit.dart';
 
 class MainAppScreen extends StatelessWidget {
   const MainAppScreen({Key? key}) : super(key: key);

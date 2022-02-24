@@ -1,6 +1,5 @@
-import 'custom_text_widget.dart';
+import 'package:chateo/presentation/widget/shared_widget/custom_text_widget.dart';
 import 'package:flutter/material.dart';
-
 
 class ChatItemPerson extends StatelessWidget {
   const ChatItemPerson({
@@ -45,17 +44,18 @@ class _RoundAvatarWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(16),
           ),
         ),
-        isOnline
-            ? Container(
-                width: 12,
-                height: 12,
-                decoration: BoxDecoration(
-                  color: Colors.green,
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: Colors.white, width: 2.0),
-                ),
-              )
-            : const SizedBox(),
+        if (isOnline)
+          Container(
+            width: 12,
+            height: 12,
+            decoration: BoxDecoration(
+              color: Colors.green,
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: Colors.white, width: 2.0),
+            ),
+          )
+        else
+          const SizedBox(),
       ],
     );
   }

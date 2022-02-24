@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import '../data_providers/firebase_provider.dart';
-import '../data_providers/i_firebase.dart';
+import 'package:chateo/data/data_providers/firebase_provider.dart';
+import 'package:chateo/data/interface/i_firebase.dart';
 
 class FireMethodRepo implements FirebaseMethod {
   final FirebaseProvider _firebaseProvider;
@@ -10,7 +10,4 @@ class FireMethodRepo implements FirebaseMethod {
   @override
   Future<String> uploadFile({required File imageToUpload}) =>
       _firebaseProvider.uploadFile(imageToUpload: imageToUpload);
-
-  //  =>
-  //     _firebaseProvider.uploadFile(destination: destination, file: file);
 }

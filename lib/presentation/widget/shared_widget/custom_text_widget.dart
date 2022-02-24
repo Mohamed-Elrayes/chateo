@@ -1,6 +1,5 @@
+import 'package:chateo/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
-
-import '../../../core/theme/app_theme.dart';
 
 class CustomTextWidget extends StatelessWidget {
   final String text;
@@ -97,28 +96,29 @@ class CustomTextWidget extends StatelessWidget {
     this.widthBox,
     this.overflow = TextOverflow.ellipsis,
     this.softWrap = true,
-        this.textAlign = TextAlign.start,
+    this.textAlign = TextAlign.start,
   })  : style = TextAppTheme.textTheme.headline2,
-        
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    TextStyle textStyle =
+    final TextStyle textStyle =
         TextStyle(color: Theme.of(context).colorScheme.primary);
     return Container(
       width: widthBox,
       color: colorTest ? Colors.red : null,
-      child: Text(text,
-          textAlign: textAlign,
-          textWidthBasis: textWidthBasis,
-          softWrap: softWrap,
-          style: customColorText
-              ? style ?? TextAppTheme.textTheme.headline3
-              : textStyle.merge(style ?? TextAppTheme.textTheme.headline3),
-          maxLines: maxLines,
-          textDirection: textDirection,
-          overflow: overflow),
+      child: Text(
+        text,
+        textAlign: textAlign,
+        textWidthBasis: textWidthBasis,
+        softWrap: softWrap,
+        style: customColorText
+            ? style ?? TextAppTheme.textTheme.headline3
+            : textStyle.merge(style ?? TextAppTheme.textTheme.headline3),
+        maxLines: maxLines,
+        textDirection: textDirection,
+        overflow: overflow,
+      ),
     );
   }
 }

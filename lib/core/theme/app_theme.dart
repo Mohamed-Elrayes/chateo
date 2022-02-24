@@ -30,8 +30,7 @@ class AppThemeData {
       scaffoldBackgroundColor: colorScheme.background,
       inputDecorationTheme: WidgetAppTheme.inputDecoration,
       // listTileTheme: ListTileThemeData(textColor: colorScheme.primary),
-      primaryTextTheme:
-          GoogleFonts.mulishTextTheme(TextAppTheme.textTheme),
+      primaryTextTheme: GoogleFonts.mulishTextTheme(TextAppTheme.textTheme),
       // indicatorColor: Colors.transparent,
       elevatedButtonTheme: WidgetAppTheme.elevatedButton,
       tabBarTheme: WidgetAppTheme.tabBarTheme,
@@ -42,16 +41,18 @@ class AppThemeData {
   }
 
   static setStatusBarAndNavigationBarColors(ThemeMode themeMode) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarIconBrightness:
-          themeMode == ThemeMode.light ? Brightness.dark : Brightness.light,
-      systemNavigationBarIconBrightness:
-          themeMode == ThemeMode.light ? Brightness.dark : Brightness.light,
-      systemNavigationBarColor: themeMode == ThemeMode.light
-          ? AppColors.bgSecondColor
-          : AppColors.activeColorFont,
-      systemNavigationBarDividerColor: Colors.transparent,
-    ));
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness:
+            themeMode == ThemeMode.light ? Brightness.dark : Brightness.light,
+        systemNavigationBarIconBrightness:
+            themeMode == ThemeMode.light ? Brightness.dark : Brightness.light,
+        systemNavigationBarColor: themeMode == ThemeMode.light
+            ? AppColors.bgSecondColor
+            : AppColors.activeColorFont,
+        systemNavigationBarDividerColor: Colors.transparent,
+      ),
+    );
   }
 }
