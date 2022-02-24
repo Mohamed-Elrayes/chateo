@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../widget/custom_text_widget.dart';
+import '../widget/shared_widget/custom_text_widget.dart';
+
     
 class ChatPersonItem extends StatelessWidget {
 

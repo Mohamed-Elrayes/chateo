@@ -1,14 +1,44 @@
+
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class UserModel {
-  String id;
-  String firstName;
+  String? id;
+  String? phoneNumber;
+  String? firstName;
   String? lastName;
-  String phoneNumber;
-  String image;
+  String? profileImage;
+  String? imageUrlServer;
+  String?  timeStamp;
   UserModel({
-    required this.id,
-    required this.firstName,
+     this.id,
+     this.phoneNumber,
+     this.firstName,
     this.lastName,
-    required this.phoneNumber,
-    required this.image,
+    this.profileImage,
+    this.imageUrlServer,
+    this.timeStamp,
   });
+ 
+
+ 
+
+
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'phoneNumber': phoneNumber,
+      'firstName': firstName,
+      'lastName': lastName,
+      'profileImage': profileImage,
+      'imageUrlServer': imageUrlServer,
+      'timeStamp': timeStamp,
+    };
+  }
+
+
+
 }

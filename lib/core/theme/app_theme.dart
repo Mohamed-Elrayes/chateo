@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/services.dart';
-
 import 'package:google_fonts/google_fonts.dart';
-part './text_app_theme.dart';
+
 part './color_scheme_theme.dart';
+part './text_app_theme.dart';
 part './widget_app_theme.dart';
 
 class AppThemeData {

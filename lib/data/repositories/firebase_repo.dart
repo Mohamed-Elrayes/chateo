@@ -1,15 +1,16 @@
-// import 'package:firebase_storage/firebase_storage.dart';
+import 'dart:io';
 
-// import 'dart:io';
+import '../data_providers/firebase_provider.dart';
+import '../data_providers/i_firebase.dart';
 
-// import '../data_providers/firebase_provider.dart';
-// import '../data_providers/i_firebase.dart';
+class FireMethodRepo implements FirebaseMethod {
+  final FirebaseProvider _firebaseProvider;
+  FireMethodRepo() : _firebaseProvider = FirebaseProvider();
 
-// class FireMethodRepo implements IFirebase {
-//   final FirebaseProvider _firebaseProvider;
-//   FireMethodRepo() : _firebaseProvider = FirebaseProvider();
-//   @override
-//   UploadTask? uploadFile({required String destination, required File file}){}
-//   //  =>
-//   //     _firebaseProvider.uploadFile(destination: destination, file: file);
-// }
+  @override
+  Future<String> uploadFile({required File imageToUpload}) =>
+      _firebaseProvider.uploadFile(imageToUpload: imageToUpload);
+
+  //  =>
+  //     _firebaseProvider.uploadFile(destination: destination, file: file);
+}

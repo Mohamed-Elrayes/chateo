@@ -1,31 +1,50 @@
-import 'dart:io';
-
-import 'package:file_picker/file_picker.dart';
-import 'package:open_file/open_file.dart';
-import 'package:path_provider/path_provider.dart';
-
-import 'api_constant.dart';
+import 'package:chateo/presentation/widget/shared_widget/custom_text_widget.dart';
+import 'package:flutter/material.dart';
 
 String countryFlagGenerate({String countryCode = 'eg'}) {
-  return countryCode.toUpperCase().replaceAllMapped(RegExp(r'[A-Z]'),
-      (match) => String.fromCharCode(match.group(0)!.codeUnitAt(0) + 127397));
+  return countryCode.toUpperCase().replaceAllMapped(
+        RegExp('[A-Z]'),
+        (match) => String.fromCharCode(match.group(0)!.codeUnitAt(0) + 127397),
+      );
 }
 
-Future<File> saveFileToDocumentsDirectory(PlatformFile file) async {
-  final _localPath = await getApplicationDocumentsDirectory();
-  final newFile = File('${_localPath.path}/${file.name}');
-  logger.wtf("message");
-  return File(file.path!).copy(newFile.path);
+SnackBar snackBarWidget(String message) {
+  return SnackBar(
+    backgroundColor: Colors.red,
+    duration: const Duration(seconds: 3),
+    content: CustomTextWidget(message),
+  );
 }
 
-void openFileDevice(String path) {
-  OpenFile.open(path);
-}
 
-Future<FilePickerResult?> pickFileImage() async =>
-    await FilePicker.platform.pickFiles(type: FileType.image);
+// Future<File> saveFileToDocumentsDirectory(PlatformFile file) async {
+//   final prefs = await SharedPreferences.getInstance();
+//   final _localPath = await getApplicationDocumentsDirectory();
+//   final newFile = File('${_localPath.path}/${file.name}');
+//   logger.wtf(newFile);
+//   final finalFile = await File(file.path!).copy(newFile.path);
+//   await prefs.setString(photoPath, finalFile.path);
+//   return finalFile;
+// }
 
-Future<File> saveImage(FilePickerResult filePicked) async {
-  final file = filePicked.files.first;
-  return await saveFileToDocumentsDirectory(file);
-}
+// void openFileDevice(String path) {
+//   OpenFile.open(path);
+// }
+
+// Future<FilePickerResult?> pickFileImage() async =>
+//     await FilePicker.platform.pickFiles(type: FileType.image);
+
+// Future<File> saveImage(FilePickerResult filePicked) async {
+//   final file = filePicked.files.first;
+//   return await saveFileToDocumentsDirectory(file);
+// }
+
+// // Future<String> readCounter(File filePth) async {
+// //   try {
+// //     // Read the file
+// //     return await filePth.readAsString();
+// //   } catch (e) {
+// //     logger.wtf(e);
+// //     rethrow ;
+// //   }
+// // }

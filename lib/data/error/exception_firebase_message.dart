@@ -1,14 +1,18 @@
 
+import '../../core/constants/logger_devtool.dart';
+
 class SignUpWithEmailAndPasswordFailure implements Exception {
-    /// The associated error message.
+  /// The associated error message.
   final String message;
   const SignUpWithEmailAndPasswordFailure([
     this.message = 'An unknown exception occurred.',
   ]);
+
   /// Create an authentication message
   /// from a firebase authentication exception code.
   factory SignUpWithEmailAndPasswordFailure.fromCode(String code) {
-    switch (code) {
+    final newCode = code.replaceAll('firebase_auth/', '');
+    switch (newCode) {
       case 'invalid-email':
         return const SignUpWithEmailAndPasswordFailure(
           'Email is not valid or badly formatted.',
@@ -33,9 +37,8 @@ class SignUpWithEmailAndPasswordFailure implements Exception {
         return const SignUpWithEmailAndPasswordFailure();
     }
   }
-
-
 }
+
 class LogInWithEmailAndPasswordFailure implements Exception {
   const LogInWithEmailAndPasswordFailure([
     this.message = 'An unknown exception occurred.',
@@ -69,6 +72,7 @@ class LogInWithEmailAndPasswordFailure implements Exception {
   /// The associated error message.
   final String message;
 }
+
 class LogInWithGoogleFailure implements Exception {
   const LogInWithGoogleFailure([
     this.message = 'An unknown exception occurred.',
@@ -118,5 +122,31 @@ class LogInWithGoogleFailure implements Exception {
   /// The associated error message.
   final String message;
 }
+
 class LogOutFailure implements Exception {}
-class UserNotLoggedInAuthException implements Exception{}
+
+class UserNotLoggedInAuthException implements Exception {}
+
+class FirException implements Exception {
+  final String message;
+  const FirException([
+    this.message = 'An unknown exception occurred.',
+  ]);
+  factory FirException.fromCode(String code) {
+     final newCode = code.replaceAll('firebase_auth/', '');
+     newCode.logI();
+     switch(newCode){
+        case 'invalid-phone-number':
+        return const FirException(
+          'phone number provided is incorrect, Please enter another Number',
+        );
+        case 'invalid-verification-code':
+        return const FirException(
+          'The SMS verification code is invalid,  Please resend the verification code sms and try again',
+        );
+         default:
+        return const FirException();
+     }
+    
+  }
+}

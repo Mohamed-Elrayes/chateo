@@ -1,0 +1,32 @@
+import 'dart:io';
+
+import '../../core/constants/logger_devtool.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:path/path.dart';
+
+import '../../core/constants/api_constant.dart';
+import 'i_firebase.dart';
+
+class FirebaseProvider implements FirebaseMethod {
+  FirebaseStorage firebase;
+  FirebaseProvider() : firebase = FirebaseStorage.instance;
+
+  @override
+  Future<String> uploadFile({required File imageToUpload}) async {
+    try {
+      final title = basename(imageToUpload.path);
+      final ref =
+          firebase.ref().child(namePathFileOnFirebaseStorage).child(title);
+      await ref.putFile(imageToUpload);
+
+      return await firebase
+          .ref()
+          .child(namePathFileOnFirebaseStorage)
+          .child(title)
+          .getDownloadURL();
+    } on FirebaseException catch (e) {
+      e.logI();
+      rethrow;
+    }
+  }
+}

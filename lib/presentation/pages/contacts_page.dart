@@ -1,9 +1,9 @@
+import '../widget/shared_widget/search_field_widget.dart';
 import 'package:flutter/material.dart';
 
-import '../widget/chat_item_person.dart';
-import '../widget/custom_text_widget.dart';
+import '../widget/shared_widget/chat_item_person.dart';
+import '../widget/shared_widget/custom_text_widget.dart';
 import '../widget/widget_animate/animated_list_chats_widget.dart';
-import '../widget/search_field_widget.dart';
 
 class ContactsPage extends StatelessWidget {
   const ContactsPage({Key? key}) : super(key: key);

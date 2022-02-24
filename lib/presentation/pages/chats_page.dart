@@ -1,10 +1,10 @@
+import '../widget/shared_widget/chat_item_person.dart';
+import '../widget/shared_widget/custom_text_widget.dart';
+import '../widget/shared_widget/search_field_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
-import '../widget/chat_item_person.dart';
-import '../widget/custom_text_widget.dart';
 import '../widget/widget_animate/animated_list_chats_widget.dart';
-import '../widget/search_field_widget.dart';
 
 class ChatsPage extends StatelessWidget {
   const ChatsPage({Key? key}) : super(key: key);

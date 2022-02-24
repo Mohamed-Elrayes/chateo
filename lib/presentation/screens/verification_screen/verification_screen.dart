@@ -1,0 +1,121 @@
+import 'package:chateo/core/constants/router_name.dart';
+import 'package:chateo/logic/cubit/auth/phone_auth_cubit.dart';
+import 'package:chateo/logic/cubit/profile_data/profile_data_cubit.dart';
+import 'package:chateo/presentation/screens/verification_screen/components/flags_widget.dart';
+import 'package:chateo/presentation/screens/verification_screen/components/phone_number_field_widget.dart';
+import 'package:chateo/presentation/widget/shared_widget/button_widget.dart';
+import 'package:chateo/presentation/widget/shared_widget/custom_text_widget.dart';
+import 'package:chateo/presentation/widget/shared_widget/dialog_widget.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+class VerificationScreen extends StatelessWidget {
+  VerificationScreen({Key? key}) : super(key: key);
+  final GlobalKey<FormState> _phoneFormKey = GlobalKey();
+
+  Future<void> _register(BuildContext context) async {
+    if (!_phoneFormKey.currentState!.validate()) {
+      _phoneFormKey.currentState?.validate();
+    } else {
+      _phoneFormKey.currentState!.save();
+      final _phoneData = BlocProvider.of<PhoneAuthCubit>(context);
+      final _profileData = BlocProvider.of<ProfileDataCubit>(context);
+      await _phoneData.submitPhoneNumber();
+      _profileData.profileDataCached.phoneNumber = _phoneData.phoneNumber;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final phoneData = BlocProvider.of<PhoneAuthCubit>(context);
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Form(
+          key: _phoneFormKey,
+          child: Container(
+            height: MediaQuery.of(context).size.height,
+            padding: const EdgeInsets.symmetric(horizontal: 50),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Column(
+                  children: [
+                    CustomTextWidget.title('Enter Your Phone Number'),
+                    const SizedBox(height: 10),
+                    CustomTextWidget.subTitle(
+                      'Please confirm your country code and enter\nyour phone number',
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 45,
+                ),
+                Row(
+                  children: [
+                    const Expanded(
+                      child: FlagWidget(),
+                    ),
+                    const SizedBox(
+                      width: 16,
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: PhoneNumberFieldWidget(
+                        onChanged: (value) {
+                          if (value?.length == 13) {
+                            FocusManager.instance.primaryFocus?.unfocus();
+                          }
+                        },
+                        onSaveField: (value) =>
+                            phoneData.phoneNumber = value!.replaceAll('-', ''),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 45,
+                ),
+                BlocConsumer<PhoneAuthCubit, PhoneAuthState>(
+                  listenWhen: (previous, current) =>
+                      previous.authStatus != current.authStatus,
+                  listener: (_, state) {
+                    if (state.authStatus == AuthStatus.success) {
+                      Navigator.pushNamed(
+                        context,
+                        RouterName.otpScreen,
+                        arguments: phoneData.phoneNumber,
+                      );
+                    }
+                    if (state.authStatus == AuthStatus.failedVerify) {
+                      showDialog(
+                        context: context,
+                        builder: (_) => DialogWidget(
+                          message: state.errorMessage!,
+                        ),
+                      );
+                    }
+                  },
+                  builder: (context, state) {
+                    switch (state.authStatus) {
+                      case AuthStatus.loading:
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      default:
+                        return ButtonWidget(
+                          label: 'continue',
+                          onTap: () {
+                            _register(context);
+                          },
+                        );
+                    }
+                  },
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

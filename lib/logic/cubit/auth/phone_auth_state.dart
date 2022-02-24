@@ -1,30 +1,42 @@
 part of 'phone_auth_cubit.dart';
 
-enum AuthStatus { loading, failed, success, otpVerified , initial }
+enum AuthStatus {
+  loading,
+  failedOtp,
+  failedVerify,
+  success,
+  otpVerified,
+  initial
+}
+enum KindUser{oldUser ,newUser }
 
 @immutable
 class PhoneAuthState extends Equatable {
-  // final User user;
   final AuthStatus authStatus;
+  final KindUser kindUser;
   final String? errorMessage;
+  final String ? userId;
   const PhoneAuthState({
-    // this.user = '',
     this.authStatus = AuthStatus.initial,
+    this.kindUser = KindUser.newUser,
+    this.userId,
     this.errorMessage,
   });
 
   @override
-  List<Object> get props => [authStatus];
+  List<Object?> get props => [authStatus , userId,kindUser];
 
   PhoneAuthState copyWith({
-    // User? user,
     AuthStatus? authStatus,
+    KindUser? kindUser,
     String? errorMessage,
+    String ? userId,
   }) {
     return PhoneAuthState(
-      // user: user ?? this.user,
       authStatus: authStatus ?? this.authStatus,
+      kindUser: kindUser ?? this.kindUser,
       errorMessage: errorMessage ?? this.errorMessage,
+      userId: userId ?? this.userId,
     );
   }
 }

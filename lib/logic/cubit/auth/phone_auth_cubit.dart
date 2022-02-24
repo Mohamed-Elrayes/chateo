@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:chateo/core/constants/logger_devtool.dart';
+import 'package:chateo/data/error/exception_firebase_message.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
@@ -10,9 +12,10 @@ part 'phone_auth_state.dart';
 class PhoneAuthCubit extends Cubit<PhoneAuthState> {
   FirebaseAuth firebase = FirebaseAuth.instance;
   late String verifyId;
+  late String phoneNumber;
   PhoneAuthCubit() : super(const PhoneAuthState());
 
-  FutureOr<void> submitPhoneNumber(String phoneNumber) async {
+  FutureOr<void> submitPhoneNumber() async {
     emit(state.copyWith(authStatus: AuthStatus.loading));
     await firebase.verifyPhoneNumber(
       phoneNumber: '+2$phoneNumber',
@@ -22,40 +25,47 @@ class PhoneAuthCubit extends Cubit<PhoneAuthState> {
       codeSent: _codeSent,
       codeAutoRetrievalTimeout: _codeAutoRetrievalTimeout,
     );
-    emit(state.copyWith(authStatus: AuthStatus.success));
   }
-
-  void _verificationCompleted(PhoneAuthCredential phoneAuthCredential) async {
-    await signIn(phoneAuthCredential);
-  }
-
-  void _verificationFailed(FirebaseAuthException error) {
-    emit(state.copyWith(
-        authStatus: AuthStatus.failed, errorMessage: error.toString()));
-  }
-
-  void _codeSent(String verificationId, int? forceResendingToken) {
-    verifyId = verificationId;
-    emit(state.copyWith(authStatus: AuthStatus.success));
-  }
-
-  void _codeAutoRetrievalTimeout(String verificationId) {}
 
   FutureOr<void> submitOtp(String otpCode) async {
-    PhoneAuthCredential _credential = PhoneAuthProvider.credential(
-        verificationId: verifyId, smsCode: otpCode);
-    await signIn(_credential);
+    emit(state.copyWith(authStatus: AuthStatus.loading));
+    try {
+      final PhoneAuthCredential _credential = PhoneAuthProvider.credential(
+        verificationId: verifyId,
+        smsCode: otpCode,
+      );
+      await signIn(_credential);
+    } on FirebaseException catch (e) {
+      final _error = FirException.fromCode(e.code);
+      emit(
+        state.copyWith(
+          authStatus: AuthStatus.failedOtp,
+          errorMessage: _error.message,
+        ),
+      );
+    }
+    emit(state.copyWith(authStatus: AuthStatus.initial));
   }
 
   FutureOr<void> signIn(PhoneAuthCredential credential) async {
-    try {
-      await FirebaseAuth.instance.signInWithCredential(credential);
-      emit(state.copyWith(
-        authStatus: AuthStatus.otpVerified,
-      ));
-    } catch (e) {
-      emit(state.copyWith(
-          authStatus: AuthStatus.failed, errorMessage: e.toString()));
+    final UserCredential userData =
+        await firebase.signInWithCredential(credential);
+    final bool isNewUser = getCurrentUser.phoneNumber == phoneNumber;
+    if (isNewUser) {
+      emit(
+        state.copyWith(
+          authStatus: AuthStatus.otpVerified,
+          userId: userData.user?.uid,
+          kindUser: KindUser.oldUser,
+        ),
+      );
+    }else{
+        emit(
+        state.copyWith(
+          authStatus: AuthStatus.otpVerified,
+          userId: userData.user?.uid,
+        ),
+      );
     }
   }
 
@@ -64,4 +74,38 @@ class PhoneAuthCubit extends Cubit<PhoneAuthState> {
   }
 
   User get getCurrentUser => FirebaseAuth.instance.currentUser!;
+
+  void _verificationCompleted(PhoneAuthCredential phoneAuthCredential) {
+    // await signIn(phoneAuthCredential);
+    // User user = firebase.currentUser!;
+    //         if (phoneAuthCredential.smsCode != null) {
+    //           try {
+    //             await user.linkWithCredential(phoneAuthCredential);
+    //           } on FirebaseAuthException catch (e) {
+    //             if (e.code == 'provider-already-linked') {
+    //               await firebase.signInWithCredential(phoneAuthCredential);
+    //             }
+    //           }
+    //         }
+  }
+  void _verificationFailed(FirebaseAuthException error) {
+    error.logWtf();
+    emit(
+      state.copyWith(
+        authStatus: AuthStatus.failedVerify,
+        errorMessage: FirException.fromCode(error.code).message,
+      ),
+    );
+  }
+
+  void _codeSent(String verificationId, int? forceResendingToken) {
+    verifyId = verificationId;
+    emit(
+      state.copyWith(
+        authStatus: AuthStatus.success,
+      ),
+    );
+  }
+
+  void _codeAutoRetrievalTimeout(String verificationId) {}
 }

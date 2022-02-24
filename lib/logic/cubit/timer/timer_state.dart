@@ -1,12 +1,12 @@
 part of 'timer_cubit.dart';
 
-enum TimerStatus { initial, run, end }
+enum TimerStatus { run, end }
 
 class TimerState extends Equatable {
 
   final TimerStatus timerStatus;
   const TimerState({
-    this.timerStatus = TimerStatus.initial,
+    this.timerStatus = TimerStatus.run,
   });
 
 

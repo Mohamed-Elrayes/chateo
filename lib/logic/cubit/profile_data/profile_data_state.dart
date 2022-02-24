@@ -1,29 +1,24 @@
 part of 'profile_data_cubit.dart';
 
-enum ImageStatus { found, unFound, loading  , initial}
-enum ImageSource { local, online , notFound}
+enum ProfileDataStatus { success, failed, unSend  , loading}
 
-class ImageProfileDataState extends Equatable {
-  const ImageProfileDataState({
-    this.imageFile,
-    this.imageStatus = ImageStatus.initial,
-    this.imageSource = ImageSource.notFound,
+class ProfileDataState extends Equatable {
+  const ProfileDataState({
+    this.profileDataStatus = ProfileDataStatus.unSend,
+     this.errorMessage,
   });
-  final File? imageFile;
-  final ImageStatus imageStatus;
-  final ImageSource imageSource;
+  final ProfileDataStatus profileDataStatus;
+  final String? errorMessage;
   @override
-  List<Object?> get props => [imageFile, imageStatus , imageSource];
+  List<Object> get props => [profileDataStatus];
 
-  ImageProfileDataState copyWith({
-    File? imageFile,
-    ImageStatus? imageStatus,
-    ImageSource? imageSource,
+  ProfileDataState copyWith({
+    ProfileDataStatus? profileDataStatus,
+    String? errorMessage,
   }) {
-    return ImageProfileDataState(
-      imageFile: imageFile ?? this.imageFile,
-      imageStatus: imageStatus ?? this.imageStatus,
-      imageSource: imageSource ?? this.imageSource,
+    return ProfileDataState(
+      profileDataStatus: profileDataStatus ?? this.profileDataStatus,
+      errorMessage: errorMessage ?? this.errorMessage,
     );
   }
 }

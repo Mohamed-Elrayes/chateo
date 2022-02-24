@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 import '../../core/constants/icon_constant.dart';
-import '../widget/custom_text_widget.dart';
+import '../widget/shared_widget/custom_text_widget.dart';
 
 class MorePage extends StatelessWidget {
   const MorePage({Key? key}) : super(key: key);

@@ -2,12 +2,13 @@ part of 'app_theme.dart';
 
 class WidgetAppTheme {
   static late ColorScheme _colorScheme;
-  static void setterColorScheme(colorScheme) => _colorScheme = colorScheme;
+  static void setterColorScheme(ColorScheme colorScheme) =>
+      _colorScheme = colorScheme;
 
   static InputDecorationTheme get inputDecoration => InputDecorationTheme(
         hintStyle: TextAppTheme.textTheme.bodyText2
             ?.copyWith(color: _colorScheme.onSurface),
-        focusedBorder:const UnderlineInputBorder(
+        focusedBorder: const UnderlineInputBorder(
           borderSide: BorderSide(width: 1.0),
         ),
       );

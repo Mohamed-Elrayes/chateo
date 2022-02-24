@@ -1,11 +1,12 @@
-import 'package:chateo/presentation/pages/chats_page.dart';
-import 'package:chateo/presentation/pages/more_page.dart';
-import 'package:chateo/presentation/widget/custom_text_widget.dart';
-import 'package:flutter/material.dart';
 
-import '../../data/models/bottom_nav_items._model.dart';
-import '../../presentation/pages/contacts_page.dart';
-import 'icon_constant.dart';
+import 'package:flutter/cupertino.dart';
+
+import '../../../../core/constants/icon_constant.dart';
+import '../../../../data/models/bottom_nav_items._model.dart';
+import '../../../pages/chats_page.dart';
+import '../../../pages/contacts_page.dart';
+import '../../../pages/more_page.dart';
+import '../../../widget/shared_widget/custom_text_widget.dart';
 
 final Map<Widget, IconSelectItem> bottomNavPages = {
   const ContactsPage(): IconSelectItem(label: 'Contacts', icon: usersIcon),
@@ -42,3 +43,4 @@ List<BottomNavigationBarItem> get bottomNavItems => [
           )
           .toList()
     ];
+
