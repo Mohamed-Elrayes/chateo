@@ -1,8 +1,8 @@
 import 'package:chateo/core/constants/icon_constant.dart';
 import 'package:chateo/data/models/bottom_nav_items._model.dart';
-import 'package:chateo/presentation/pages/chats_page.dart';
+import 'package:chateo/presentation/pages/chats_page/chats_page.dart';
 import 'package:chateo/presentation/pages/contacts_page.dart';
-import 'package:chateo/presentation/pages/more_page.dart';
+import 'package:chateo/presentation/pages/more_page/more_page.dart';
 import 'package:chateo/presentation/widget/shared_widget/custom_text_widget.dart';
 import 'package:flutter/cupertino.dart';
 

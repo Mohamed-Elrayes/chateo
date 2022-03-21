@@ -1,38 +1,52 @@
-import 'package:chateo/logic/cubit/auth/phone_auth_cubit.dart';
-import 'package:chateo/logic/cubit/profile_data/profile_data_cubit.dart';
-import 'package:chateo/logic/cubit/theme/theme_cubit.dart';
-import 'package:chateo/logic/cubit/timer/timer_cubit.dart';
-import 'package:chateo/presentation/screens/main_app_screen.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:chateo/initialization_app.dart';
+import 'package:chateo/logic/bloc_observer.dart';
+import 'package:chateo/main_app_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  runApp(const MyApp());
-}
+Future<void> main() => BlocOverrides.runZoned(
+      () async {
+        WidgetsFlutterBinding.ensureInitialized();
+    //  await Firebase.initializeApp();
+    // await initializeDependencies();
+        await InitializationApp.ensureInitialize();
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => ThemeCubit(),
-        ),
-        BlocProvider(
-          create: (context) => ProfileDataCubit(),
-        ),
-        BlocProvider(
-          create: (context) => TimerCubit(),
-        ),
-        BlocProvider(
-          create: (context) => PhoneAuthCubit(),
-        ),
-      ],
-      child: const MainAppScreen(),
+        //  await InitializationApp.init();
+        // await initializeDependencies();
+        // await Firebase.initializeApp();
+        runApp(App());
+      },
+      blocObserver: AppBlocObserver(),
     );
-  }
-}
+        
+
+// void main() async {
+//   WidgetsFlutterBinding.ensureInitialized();
+//   await Firebase.initializeApp();
+//   runApp(const MyApp());
+// }
+
+
+
+    // FirebaseFirestore.instance.collection(rootChatsCollection).add(
+    //       MessageModel(
+    //        content: 'message',
+    //        date: getFormattedTimeEvent(DateTime.now().millisecondsSinceEpoch).toString(),
+    //        fromMe: Random().nextBool(),
+    //        id: Random().nextInt(50),
+           
+    //       ).toMap(),
+    //     );
+
+    // FirebaseFirestore.instance
+    //     .collection(rootChatsCollection)
+    //     .orderBy('createAt', descending: true)
+    //     .snapshots()
+    //     .listen((event) {
+    //   event.docs.map((DocumentSnapshot document) {
+    //     final data =
+    //         MessageModel.fromMap(document.data() as Map<String, dynamic>);
+    //     data.message.logD();
+    //   }).toList();
+    // });
+

@@ -1,21 +1,28 @@
+import 'package:chateo/data/models/user_model.dart';
 import 'package:chateo/presentation/widget/shared_widget/custom_text_widget.dart';
 import 'package:flutter/material.dart';
 
 class ChatItemPerson extends StatelessWidget {
   const ChatItemPerson({
     Key? key,
-    required this.personName,
+    required this.userModel,
     this.isOnline,
+    this.onTap,
   }) : super(key: key);
 
-  final String personName;
+  final UserModel userModel;
   final bool? isOnline;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: _RoundAvatarWidget(isOnline: isOnline ?? false),
-      title: CustomTextWidget(personName),
+      onTap: onTap,
+      leading: _RoundAvatarWidget(
+        isOnline: isOnline ?? false,
+        image: userModel.imageUrlServer!,
+      ),
+      title: CustomTextWidget(userModel.firstName!),
       subtitle: CustomTextWidget(
         'Online',
         style:
@@ -29,19 +36,21 @@ class _RoundAvatarWidget extends StatelessWidget {
   const _RoundAvatarWidget({
     Key? key,
     required this.isOnline,
+    required this.image,
   }) : super(key: key);
   final bool isOnline;
+  final String image;
   @override
   Widget build(BuildContext context) {
     return Stack(
       alignment: Alignment.topRight,
       children: [
-        Container(
+        SizedBox(
           width: 48,
           height: 48,
-          decoration: BoxDecoration(
-            color: Colors.amberAccent,
-            borderRadius: BorderRadius.circular(16),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Image.network(image, fit: BoxFit.cover),
           ),
         ),
         if (isOnline)

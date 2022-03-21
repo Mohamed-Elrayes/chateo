@@ -1,5 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:chateo/core/constants/logger_devtool.dart';
-import 'package:chateo/core/constants/router_name.dart';
+import 'package:chateo/core/router/app_router.dart';
+import 'package:chateo/core/router/routes.dart';
 import 'package:chateo/logic/cubit/image_profile/image_profile_cubit.dart';
 import 'package:chateo/logic/cubit/profile_data/profile_data_cubit.dart';
 import 'package:chateo/presentation/screens/profile_screen/components/build_form_fields.dart';
@@ -89,19 +91,21 @@ class _BuildProfileWidgets extends StatelessWidget {
               BlocConsumer<ProfileDataCubit, ProfileDataState>(
                 listener: (context, state) {
                   if (state.profileDataStatus == ProfileDataStatus.loading) {
-                    showDialog(
+                    showDialog<AlertDialog>(
                       context: context,
                       builder: (ctx) => const LoadingIndicator(),
                     );
                   }
                   if (state.profileDataStatus == ProfileDataStatus.success) {
-                    Navigator.pushNamedAndRemoveUntil(
-                      context,
-                      RouterName.bottomNavScreen,
-                      (route) => false,
-                    );
+                    context.router.pushAndPopUntil(BottomNavRoute(), predicate: (Route<dynamic> route)=>false);
+
+                    // Navigator.pushNamedAndRemoveUntil(
+                    //   context,
+                    //   RouterName.bottomNavScreen,
+                    //   (route) => false,
+                    // );
                   } else {
-                    showDialog(
+                    showDialog<AlertDialog>(
                       context: context,
                       builder: (ctx) =>
                           DialogWidget(message: state.errorMessage!),

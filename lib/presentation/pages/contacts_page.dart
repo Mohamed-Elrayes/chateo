@@ -20,8 +20,7 @@ class ContactsPage extends StatelessWidget {
           Expanded(
             child: ListChatsWidget(
               itemCount: 6,
-              childBuilderAnimated: (context, index) => const ChatItemPerson(
-                  personName: 'Athalia Putri', isOnline: true),
+              childBuilderAnimated: (context, index) => Container(),
             ),
           )
         ],

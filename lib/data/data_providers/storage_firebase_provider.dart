@@ -2,17 +2,17 @@ import 'dart:io';
 
 import 'package:chateo/core/constants/api_constant.dart';
 import 'package:chateo/core/constants/logger_devtool.dart';
-import 'package:chateo/data/interface/i_firebase.dart';
+import 'package:chateo/data/interface/i_storage_firebase.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:path/path.dart';
 
-class FirebaseProvider implements FirebaseMethod {
+class StorageFirebaseProvider implements IStorageFirebase {
   FirebaseStorage firebase;
-  FirebaseProvider() : firebase = FirebaseStorage.instance;
+  StorageFirebaseProvider() : firebase = FirebaseStorage.instance;
 
   @override
   Future<String> uploadFile({required File imageToUpload}) async {
-    try {
+    // try {
       final title = basename(imageToUpload.path);
       final ref =
           firebase.ref().child(namePathFileOnFirebaseStorage).child(title);
@@ -23,9 +23,9 @@ class FirebaseProvider implements FirebaseMethod {
           .child(namePathFileOnFirebaseStorage)
           .child(title)
           .getDownloadURL();
-    } on FirebaseException catch (e) {
-      e.logI();
-      rethrow;
-    }
+    // } on FirebaseException catch (e) {
+    //   e.logI();
+    //   rethrow;
+    // }
   }
 }

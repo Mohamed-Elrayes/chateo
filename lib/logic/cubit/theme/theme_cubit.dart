@@ -31,7 +31,7 @@ class ThemeCubit extends Cubit<ThemeState> {
 
   void _setTheme(ThemeMode themeMode) {
     // WidgetAppTheme.currentThemeMode = themeMode;
-    AppThemeData.setStatusBarAndNavigationBarColors(themeMode);
+    // AppThemeData.setStatusBarAndNavigationBarColors(themeMode);
     emit(ThemeState(themeMode: themeMode));
   }
 }

@@ -1,4 +1,7 @@
-import 'package:chateo/core/constants/router_name.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:chateo/core/router/app_router.dart';
+import 'package:chateo/core/router/routes.dart';
+import 'package:chateo/presentation/screens/verification_screen/verification_screen.dart';
 import 'package:chateo/presentation/widget/shared_widget/button_widget.dart';
 import 'package:chateo/presentation/widget/shared_widget/custom_text_widget.dart';
 import 'package:flutter/material.dart';
@@ -58,8 +61,8 @@ class WelcomeScreen extends StatelessWidget {
                   ),
                   ButtonWidget(
                     label: 'Start Messaging',
-                    onTap: () => Navigator.of(context)
-                        .pushNamed(RouterName.verificationScreen),
+                      onTap: () =>context.router.push(VerificationRoute()),
+                   
                   )
                 ],
               )

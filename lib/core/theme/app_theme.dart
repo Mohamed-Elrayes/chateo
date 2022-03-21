@@ -40,19 +40,19 @@ class AppThemeData {
     );
   }
 
-  static setStatusBarAndNavigationBarColors(ThemeMode themeMode) {
-    SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
-        statusBarIconBrightness:
-            themeMode == ThemeMode.light ? Brightness.dark : Brightness.light,
-        systemNavigationBarIconBrightness:
-            themeMode == ThemeMode.light ? Brightness.dark : Brightness.light,
-        systemNavigationBarColor: themeMode == ThemeMode.light
-            ? AppColors.bgSecondColor
-            : AppColors.activeColorFont,
-        systemNavigationBarDividerColor: Colors.transparent,
-      ),
-    );
-  }
+  // static setStatusBarAndNavigationBarColors(ThemeMode themeMode) {
+  //   SystemChrome.setSystemUIOverlayStyle(
+  //     SystemUiOverlayStyle(
+  //       statusBarColor: Colors.transparent,
+  //       statusBarIconBrightness:
+  //           themeMode == ThemeMode.light ? Brightness.dark : Brightness.light,
+  //       systemNavigationBarIconBrightness:
+  //           themeMode == ThemeMode.light ? Brightness.dark : Brightness.light,
+  //       systemNavigationBarColor: themeMode == ThemeMode.light
+  //           ? AppColors.bgSecondColor
+  //           : AppColors.activeColorFont,
+  //       systemNavigationBarDividerColor: Colors.transparent,
+  //     ),
+  //   );
+  // }
 }

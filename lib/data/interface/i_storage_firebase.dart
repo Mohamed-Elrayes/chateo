@@ -1,7 +1,6 @@
 import 'dart:io';
 
 
-abstract class FirebaseMethod {
+abstract class IStorageFirebase {
   Future<String> uploadFile({required File imageToUpload});
-  
 }

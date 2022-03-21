@@ -11,7 +11,7 @@ class PhoneNumberFieldWidget extends StatelessWidget {
   final ValueChanged<String?>? onSaveField;
   @override
   Widget build(BuildContext context) {
-    final _bgColor = Theme.of(context).colorScheme.onTertiary;
+    // final _bgColor = Theme.of(context).colorScheme.onTertiary;
     return TextFormField(
       autofocus: true,
       cursorColor: Colors.black,
@@ -24,8 +24,8 @@ class PhoneNumberFieldWidget extends StatelessWidget {
       ),
       onChanged: onChanged,
       decoration: InputDecoration(
-        fillColor: _bgColor,
-        focusColor: _bgColor,
+        // fillColor: _bgColor,
+        // focusColor: _bgColor,
         filled: true,
         constraints: const BoxConstraints(maxHeight: 50),
         // errorBorder: InputBorder.none,

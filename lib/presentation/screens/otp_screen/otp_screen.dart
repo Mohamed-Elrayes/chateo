@@ -1,5 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:chateo/core/constants/logger_devtool.dart';
-import 'package:chateo/core/constants/router_name.dart';
+import 'package:chateo/core/router/app_router.dart';
+import 'package:chateo/core/router/routes.dart';
 import 'package:chateo/logic/cubit/auth/phone_auth_cubit.dart';
 import 'package:chateo/logic/cubit/profile_data/profile_data_cubit.dart';
 import 'package:chateo/presentation/widget/shared_widget/custom_text_widget.dart';
@@ -11,13 +13,12 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class OtpScreen extends HookWidget {
-  const OtpScreen({Key? key}) : super(key: key);
-
+  const OtpScreen( {Key? key,required this.phoneNumberArg,}) : super(key: key);
+final String phoneNumberArg;
   @override
   Widget build(BuildContext context) {
     final controller = useTextEditingController();
-    final String phoneNumberArg =
-        ModalRoute.of(context)?.settings.arguments as String;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -42,30 +43,33 @@ class OtpScreen extends HookWidget {
                 listenWhen: (previous, current) =>
                     previous.authStatus != current.authStatus,
                 listener: (_, state) {
-                  if (state.authStatus == AuthStatus.otpVerified &&
-                      state.kindUser == KindUser.newUser) {
-                    Navigator.pushNamedAndRemoveUntil(
-                      context,
-                      RouterName.bottomNavScreen,
-                      (route) => false,
-                    );
-                  } else if (state.authStatus == AuthStatus.otpVerified) {
-                    Navigator.pushNamedAndRemoveUntil(
-                      context,
-                      RouterName.profileScreen,
-                      (route) => false,
-                    );
+                  if (state.authStatus == AuthStatus.login) {
+                    context.router.pushAndPopUntil(BottomNavRoute(), predicate: (Route<dynamic> route)=>false);
+                      
+                    // Navigator.pushNamedAndRemoveUntil(
+                    //   context,
+                    //   RouterName.bottomNavScreen,
+                    //   (route) => false,
+                    // );
+                  } else if (state.authStatus == AuthStatus.completeSend  ) {
+                    context.router.pushAndPopUntil(BottomNavRoute(), predicate: (Route<dynamic> route)=>false);
+
+                    // Navigator.pushNamedAndRemoveUntil(
+                    //   context,
+                    //   RouterName.profileScreen,
+                    //   (route) => false,
+                    // );
                   }
                   if (state.authStatus == AuthStatus.loading) {
-                    showDialog(
+                    showDialog<AlertDialog>(
                       context: context,
                       builder: (ctx) => const LoadingIndicator(),
                     );
                   }
-                  if (state.authStatus == AuthStatus.failedOtp) {
+                  if (state.authStatus == AuthStatus.failed) {
                     controller.clear();
                     'message'.logWtf();
-                    showDialog(
+                    showDialog<AlertDialog>(
                       context: context,
                       builder: (_) => DialogWidget(
                         message: state.errorMessage!,

@@ -1,8 +1,6 @@
 name: chateo
-description: A new Flutter project.
-
+description: Chat app .
 publish_to: "none"
-
 version: 1.0.0+1
 
 environment:
@@ -10,13 +8,15 @@ environment:
 
 dependencies:
   animations: ^2.0.2
-  bloc: ^8.0.2
+  auto_route: ^3.2.4
   cloud_firestore: ^2.5.4
+  emoji_picker_flutter: ^1.1.2
   equatable: ^2.0.3
   file_picker: ^4.3.3
   firebase_auth: ^3.3.6
   firebase_core: ^1.12.0
   firebase_storage: ^10.2.7
+  flex_color_scheme: ^4.2.0
   flutter:
     sdk: flutter
   flutter_bloc: ^8.0.1
@@ -24,8 +24,8 @@ dependencies:
   flutter_staggered_animations: ^1.0.0
   flutter_svg: ^1.0.3
   flutter_vector_icons: ^1.0.0
+  get_it: 7.2.0
   google_fonts: ^2.3.1
-  hydrated_bloc: ^8.0.0
   logger: ^1.1.0
   open_file: ^3.2.1
   path_provider: ^2.0.9
@@ -35,7 +35,12 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  lint: ^1.8.2
+  # lint: ^1.8.2
+  very_good_analysis: ^2.4.0
+  auto_route_generator: ^3.2.3
+  build_runner: 
+
+
 
 flutter:
   uses-material-design: true

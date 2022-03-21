@@ -17,3 +17,5 @@ const IconData messageIcon =SimpleLineIcons.envelope;
 
 const IconData forwardArrowIcon =Entypo.chevron_small_right;
 const IconData privacyIcon =MaterialIcons.info_outline;
+
+const logoutIcon = MaterialIcons.logout;

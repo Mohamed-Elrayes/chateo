@@ -1,5 +1,6 @@
 import 'package:chateo/presentation/widget/shared_widget/custom_text_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 String countryFlagGenerate({String countryCode = 'eg'}) {
   return countryCode.toUpperCase().replaceAllMapped(
@@ -15,6 +16,10 @@ SnackBar snackBarWidget(String message) {
     content: CustomTextWidget(message),
   );
 }
+  String getFormattedTimeEvent(int time) {
+    final DateFormat newFormat = DateFormat("h:mm a");
+    return newFormat.format(DateTime.fromMillisecondsSinceEpoch(time));
+  }
 
 
 // Future<File> saveFileToDocumentsDirectory(PlatformFile file) async {
